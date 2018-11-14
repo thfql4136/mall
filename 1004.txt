@@ -1,0 +1,38 @@
+VSC
+ctrl + h 
+1. 바꿀 코드 (예 <span>v</span> ) 전체 드래그
+2. ctrl + h 누르기
+3. 상단에 뜨면 두번째 칸에 바꿀 코드 입력
+(예 <span class="txt_green">v</span> )
+주의사항 class 띄고 = 붙이면 에러 남 / 꼭 붙이기
+
+===================================================
+포토샵
+포토샵에서 바로가기 키 바꾸기
+edit > keyboard shortcuts > 
+	file > save as 와 save for web 바꾸기
+	edit > undo/redo 와 step backward 바꾸기
+	img > crop 에 alt+F1 추가하기
+
+사진 편리하게 자르기위해 크기를 설정한 후 자른다
+(어떤 컨텐츠를 자르냐에 따라 넓이와 높이는 달라진다)
+marqee tool (점선 상자) 누른 후 
+styles : fixed size
+width: 214px
+height:179px
+
+1.컨텐츠 선택 후 (marqee tool로 선택)
+2.alt+F1 으로 crop
+3.ctrl+shift+s 로 저장
+	jpge로 변경 
+	이름 site0~9 이런식으로 저장
+====================================================
+.navs > li:not(.menu_modal){float: left; height: 50px; line-height:50px; }
+	.menu_modal은 제외하고 float를 시켜라
+=======================================================
+main.js
+
+$(".menu li").hover(function(){1}, function(){2});
+menu 클래스 안에 li들에게 마우스를 올리면
+function(){1} > 
+function(){2} 

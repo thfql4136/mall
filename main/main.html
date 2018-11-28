@@ -5,7 +5,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>도자기 마을</title>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.2/css/all.css" integrity="sha384-/rXc/GQVaYpyDdyxK+ecHPVYJSN9bmVFBvjA/9eOB+pb3F2w2N6fc5qB9Ew5yIns"
+    crossorigin="anonymous">
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="../css/base.css">
@@ -17,9 +18,15 @@
   <script defer src="/__/firebase/init.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
 </head>
 
 <body>
+  <div class="loader">
+    <div>
+      <span class="fa fa-spin fa-spinner "></span>
+    </div>
+  </div>
   <header>
     <div class="wrap clear">
       <ul class="hd_lt">
@@ -168,10 +175,57 @@
           <div class="ban_price">Only $199.00</div>
         </li>
       </ul>
-     
+
     </div>
     <div class="rt_arrow fas fa-angle-right"></div>
   </section>
+  <section class="featured wrap">
+    <h5>WOODMART COLLECTIONS</h5>
+    <h3>FEATURED CATEGORIES</h3>
+    <h5>WoodMart is a powerful eCommerce theme for WordPress.</h5>
+    <div class="featured_items clear">
+        <ul class="featured_lt">
+          <li class="featured_item">
+            <img src="../img/main/cat-23-860x860.jpg" class="img">
+            <div>
+            <h3>FURNITURE</h3>
+            <h5>22products</h5>
+          </div>
+          </li>
+        </ul>
+        <ul class="featured_rt">
+          <li class="featured_item">
+            <img src="../img/main/cat-clock-3-430x430.jpg" class="img">
+            <div>
+            <h3>CLOCKS</h3>
+            <h5>12products</h5>
+          </div>
+          </li>
+          <li class="featured_item">
+            <img src="../img/main/cat-klock-430x430.jpg" class="img">
+            <div>
+            <h3>ACCESSORIES</h3>
+            <h5>12products</h5>
+          </div>
+          </li>
+          <li class="featured_item">
+            <img src="../img/main/light-cat-5-430x430.jpg" class="img">
+            <div>
+            <h3>LIGHING</h3>
+            <h5>16products</h5>
+          </div>
+          </li>
+          <li class="featured_item">
+            <img src="../img/main/Toys-cat-1-430x430.jpg" class="img">
+            <div>
+            <h3>TOYS</h3>
+            <h5>12products</h5>
+          </div>
+          </li>
+        </ul>
+    </div>
+  </section>
+
   <footer>
 
   </footer>

@@ -2,6 +2,14 @@
 .wrap {max-width:1200px; margin:0 auto;}
 .arrow_down{font-size:0.5em !important;}
 .txt_green{color:#84c14f;}
+.c_greyccc {color:#ccc;}
+.c_greyddd {color:#ddd;}
+.c_greyeee {color:#eee;}
+.c_green {color:#84b736;}
+
+/***** 이미지 로더 *****/
+.loader {width:100%; height:100%; background-color: rgba(0,0,0,0.4); display: table; position: absolute; z-index:99999;}
+.loader > div {display: table-cell; vertical-align: middle; font-size: 5rem; color:#fff; text-align: center;}
 
 /***** HEADER *****/
 header {background-color:#84b736; font-size:1rem; font-weight:400; color:#fff;}
@@ -47,18 +55,16 @@ position: absolute; top:0; right:-0.5em;}
 .navs > .menu .arrow_down{color:#ccc;}
 .navs > .menu > ul > li{float: left; margin-left:1em; position: relative;}
 .navs > .menu > ul > li:nth-child(1),  .navs > .menu > ul > li:nth-child(2){position: static !important;}
-
 .navs > .etc{width:270px; text-align: right;}
 .navs > .etc > :nth-child(2){padding:0 0.5em;}
 
 .menu > ul > li {cursor: pointer;}
-.menu_modal{background-color: #fff; top:51px; left:0;  position: absolute !important; width:100%;  display:none; padding:3em 0; border-bottom:1px solid #ccc;}
+.menu_modal{background-color: #fff; top:51px; left:0;  position: absolute !important; width:100%;  display:none; padding:3em 0; border-bottom:1px solid #ccc; z-index:20;}
 .menu_modal a{text-decoration: none; }
 .menu_modal li {line-height: 2.5em; position: relative;}   /*기준점이 되어라 relative/ float:left를 하면 글씨만큼만 영역으로 만들어진다*/
 .menu_modal .tooltips{position: absolute; padding:0.15em; top:-1.20em;  left:0; opacity:1; color:#fff; font-size: 0.6em; line-height: 1.5em;}  /*opacity를 줘야 보임 */
 .menu_modal .tooltips > div{width:8px; height: 8px; transform:rotate(55deg); position: absolute; left:20%; bottom:-3px;}
-/*.sites_menu{width:100%; }
-.sites_menu > li{float:left; }*/
+
 #modal0 > ul {width:20%; padding:2%; float: left;}
 #modal0 > ul > :first-child {box-shadow: 0 0 3px rgba(0,0,0,0.3);}
 #modal0 > ul > :last-child {margin:0.5em 0; text-align: center; color:#333; font-weight: 400;}
@@ -84,13 +90,33 @@ position: absolute; top:0; right:-0.5em;}
 .post .post_cnt{color:#999; font-size: 0.75em;}
 .post .post_comment{ color:#999; font-size: 0.75em;}
 
+#modal3 {width:802px; position: absolute; border:1px solid #ccc; margin-top:-1px; }
+#modal3 > .demo > ul {width:25%; float:left; padding:0 20px; background-color: #fff;}
+.demo .title a{font-weight: 400; color:#222;}
+.demo .sub a{color:#999; font-size: 0.9em;}
+.demo a:hover{color:#84b736;}
+
+#modal4 {width:802px; position: absolute; border:1px solid #ccc; margin-top:-1px;}
+#modal4 > .theme > ul {width:25%; float:left; padding:0 20px; background-color: #fff;}
+.theme .title a{font-weight:400; color:#222;}
+.theme .sub a{color:#999; font-size: 0.9em;}
+.theme a:hover{color:#84b736;}
+
+/*******좌측 네비게이션 및 배너*****/
 .banners {position: relative;}
-.banners .cate {width:270px; border-right:1px solid #ccc; float:left;}
+.banners .cate {width:270px; border-right:1px solid #ccc; float:left; position: relative;}
 .banners .banner {width:100%; position: absolute; top:0; left:270px; background-color: #f8f8f8; height:490px;overflow: hidden; padding:5% 0 0 5%; }
 .banners .cate > li {padding:0.75em; font-size: 1.25em; border-bottom:1px solid #ccc; }
-.banners .cate li > a {margin-left:1em; text-decoration: none;}
-.banners .cate li > a:hover {color:#84b736;}
-.banners .cate li .fa-angle-right {color:#aaa; float:right; padding-top:0.2em;}
+.banners .cate > li > a {margin-left:1em; text-decoration: none;}
+.banners .cate > li > a:hover {color:#84b736;}
+.banners .cate > li .fa-angle-right {color:#aaa; float:right; padding-top:0.2em;}
+.banners .cate > li > .cate_panel {position: absolute; border:1px solid #ccc; width:800px; left:269px; top:-1px; z-index:20; height:491px; background-color: #fff; display:none;}
+.fur_panel {width:25%; float:left; padding:2%; font-size:1.25rem;}
+.fur_panel > li {padding:5px 0;}
+.fur_panel > li:hover {color:#84b736;}
+.fur_panel > li:nth-child(2) {font-weight: bold;}
+.fur_brand_panel {width:100%; position: absolute; bottom:0; background-color: #f1f1f1;}
+.fur_brand_panel > li {float:left; width:25%; text-align: center; padding:0.5% 5%;}
 
 .banner > li {display:none;}
 .banner .ban_img {position: absolute; width:50%; right:5%; top:0;}
@@ -116,14 +142,26 @@ position: absolute; top:0; right:-0.5em;}
 	100% {opacity:1; right:0;}
 }
 
-#modal3 {width:802px; position: absolute; border:1px solid #ccc; margin-top:-1px; }
-#modal3 > .demo > ul {width:25%; float:left; padding:0 20px; background-color: #fff;}
-.demo .title a{font-weight: 400; color:#222;}
-.demo .sub a{color:#999; font-size: 0.9em;}
-.demo a:hover{color:#84b736;}
-
-#modal4 {width:802px; position: absolute; border:1px solid #ccc; margin-top:-1px;}
-#modal4 > .theme > ul {width:25%; float:left; padding:0 20px; background-color: #fff;}
-.theme .title a{font-weight:400; color:#222;}
-.theme .sub a{color:#999; font-size: 0.9em;}
-.theme a:hover{color:#84b736;}
+/*******FEATURED*****/
+/* section {border:1px solid #f00;} */
+.featured {margin-top:60px; text-align: center; margin-bottom:60px;}
+.featured > h5:nth-child(1) {color:#bbb;}
+.featured > h5:nth-child(3) {color:#999;}
+.featured > h3 {color:#333; padding:1rem 0; line-height:2rem;}
+.featured_items {margin-top:2rem;}
+.featured_lt {float:left; width:49%;}
+.featured_rt {float:right; width:50%;  }
+.featured_item {box-shadow: 2px 2px 3px rgba(0,0,0,0.2); position: relative; text-align: left; overflow: hidden;}
+.featured_rt .featured_item {margin:0 2% 2% 0; width:48%; float:left;}
+.featured_item > div {position: absolute; bottom:-3rem; left:1rem;}
+.featured_item h3 {color:#333; padding:0.5rem;}
+.featured_item h5 {color:#bbb; padding:0.5rem;}
+.featured_item > img { animation-duration: 0.5s; animation-fill-mode: forwards; }
+@keyframes featuredAni {
+	0% {transform: scale(1);}
+	100% {transform: scale(1.3);}
+}
+@keyframes featuredAniBack {
+	0% {transform: scale(1.3);}
+	100% {transform: scale(1);}
+}

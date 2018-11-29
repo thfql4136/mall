@@ -643,6 +643,7 @@ $(".banner").mousemove(function (evt) {  //클래스배너에서 마우스가 �
 });
 
 /********** Featured ***********/
+/********** 밑에꺼라 같은 의미 ***********/
 /* $(".featured_item").hover(function(){
 	$(this).find("h5").stop().slideDown(200);
 }, function(){
@@ -657,3 +658,97 @@ $(".featured_item").hover(function(){
 }
 );
 
+
+/********** Featured Products ***********/
+var prdNum = 0;
+$(".prd_nav > li").click(function(){ //이벤트 선언
+ prdNum = $(this).index(); //클릭 된 애 값을 받아올꺼야, index는 값을 가져올때 사용
+ $(".prd_nav > li").css({"color":"#666"});
+$(".prd_nav div").css({"width":0});
+$(this).css({"color":"#222"});
+$(this).children("div").css({"width":"100%"});
+});
+
+$(".prd_nav > li").hover(function(){//이벤트 선언
+	if($(this).index() !=prdNum){ //현재 선택된 애는 제외 시킨다
+		$(this).css({"color":"#222"});
+		$(this).children("div").stop().animate({"width":"100%"}, 100);
+	}
+},function(){
+    if($(this).index() !=prdNum){
+		$(this).css({"color":"#666"});
+		$(this).children("div").stop().animate({"width":"0%"}, 100);
+	}
+});
+$(".prd_nav > li").eq(0).trigger("click");//이벤트 실행, eq는 나의 순서를 달라고 할때 사용
+/********** 내가 짠것 ***********/
+/* $(".prd_nav").find("li:nth-child(1)").css({"color":"#222"});
+$(".prd_nav").find(".one").css({"width":"100%"});
+
+$(".prd_nav > li:nth-child(1)").click(function(){
+	$(this).css({"color":"#222"});
+$(".one").css({"width":"100%"});
+	$(".prd_nav").find("li:nth-child(2)").css({"color":"#666"});
+	$(".prd_nav").find(".two").css({"width":"0%"});	
+	$(".prd_nav > li:nth-child(3)").css({"color":"#666"});
+$(".three").css({"width":"0%"});
+});
+
+$(".prd_nav > li:nth-child(1)").hover(function(){
+	$(".one").css({"width":"100%"});
+}, function(){
+	$(".one").css({"width":"100%"});
+});
+
+$(".prd_nav > li:nth-child(2)").click(function(){
+	$(".prd_nav").find("li:nth-child(1)").css({"color":"#666"});
+	$(".prd_nav").find(".one").css({"width":"0%"});	
+$(this).css({"color":"#222"});
+$(".two").css({"width":"100%"});
+$(".prd_nav > li:nth-child(3)").css({"color":"#666"});
+$(".three").css({"width":"0%"});
+});
+$(".prd_nav > li:nth-child(2)").hover(function(){
+	$(".two").css({"width":"100%"});
+	
+}, function(){
+	$(".two").css({"width":"100%"});
+});
+
+
+$(".prd_nav > li:nth-child(3)").click(function(){
+	$(".prd_nav").find("li:nth-child(2)").css({"color":"#666"});
+	$(".prd_nav").find(".two").css({"width":"0%"});	
+$(this).css({"color":"#222"});
+$(".three").css({"width":"100%"});
+});
+
+$(".prd_nav > li:nth-child(3)").hover(function(){
+	$(".three").css({"width":"100%"});
+}, function(){
+	$(".three").css({"width":"0%"});
+}); */
+
+
+$(".prd").hover(function(){
+	$(this).children(".prd_hover").stop().fadeIn(300);
+	},function(){
+		$(this).children(".prd_hover").stop().fadeOut(300)});
+
+/* $(".prd").hover(function(){
+$(this).children(".prd_hover").stop().fadeIn(300, function(){ //콜백기능
+$(this).children(".prd_img").children("img").css({"animation-name":"prdImg"})
+})
+},function(){
+	$(this).children(".prd_hover").stop().fadeOut(300)}); */
+/* $(".prd").hover(function(){
+	$(this).children(".prd_hover").stop().fadeIn(300);
+	$(this).children(".prd_hover").children(".prd_img").children("img").css({"animation-name":"prdImg"})
+
+}, function(){
+	$(this).children(".prd_hover").stop().fadeOut(300)}); */
+$(".prd_hover_img").hover(function(){
+	$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
+}, function(){
+	$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+});

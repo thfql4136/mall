@@ -1,5 +1,5 @@
 /***** 공통사항 *****/
-footer { padding-bottom:300px;}
+footer { padding-bottom:5000px;}
 .wrap {max-width:1200px; margin:0 auto;}
 .arrow_down{font-size:0.5em !important;}
 .txt_green{color:#84c14f;}
@@ -111,7 +111,8 @@ position: absolute; top:0; right:-0.5em;}
 .banners .cate > li > a {margin-left:1em; text-decoration: none;}
 .banners .cate > li > a:hover {color:#84b736;}
 .banners .cate > li .fa-angle-right {color:#aaa; float:right; padding-top:0.2em;}
-.banners .cate > li > .cate_panel {position: absolute; border:1px solid #ccc; width:800px; left:269px; top:-1px; z-index:20; height:491px; background-color: #fff; display:none;}
+.banners .cate > li > .cate_panel {position: absolute; border:1px solid #ccc; width:800px; left:269px; top:-1px; z-index:20; height:491px; 
+	background-color: #fff; display:none;}
 .fur_panel {width:25%; float:left; padding:2%; font-size:1.25rem;}
 .fur_panel > li {padding:5px 0;}
 .fur_panel > li:hover {color:#84b736;}
@@ -168,26 +169,28 @@ position: absolute; top:0; right:-0.5em;}
 }
 
 /******* FEATURED PRODUCTS *****/
-.prds {margin-top:60px; text-align: center; }
+.prds {margin-top:60px; text-align:center;}
 .prds > h5:nth-child(1) {color:#bbb;}
 .prds > h5:nth-child(3) {color:#999;}
 .prds > h3 {color:#333; padding:1rem 0; line-height:2rem;}
 
-.prd_nav {margin-top:2rem; }
-.prd_nav > li {display:inline-block; font-size: 1.125rem; color:#666; font-weight: bold; margin:0 1rem; cursor: pointer; position: relative;}
-.prd_nav > li > div {width:0%; height:2px; background-color:#84b736; position: absolute;}
+.prd_nav {margin-top:2rem;}
+.prd_nav > li {display:inline-block; font-size:1.125rem; color:#666; font-weight:bold; margin:0 1rem; cursor:pointer; position:relative;}
+.prd_nav > li > div {width:0%; height:2px; background-color:#84b736; position:absolute;}
 
-.prd_wrap {margin-top:2rem;}
-.prd {width:24%; padding:0.5%; float:left; font-size: 1rem; position: relative;}
-.prd_tit {color:#555; font-size: 1.25em;  line-height: 1.5em; padding:0.25em; font-weight: bold;}
-.prd_cate {font-size: 0.875em; color:#888; padding:0.25em;}
+.prd_out_wrap { margin-top:2rem; position: relative; }
+.prd_wrap { display:none; position: absolute; top:5rem; opacity:0; width:100%;}
+.prd {width:24%; margin:0.5%; float:left; font-size:1rem; position:relative;}
+.prd_tit {color:#555; font-size:1.25em; line-height:1.5em; padding:0.25em; font-weight:bold;}
+.prd_cate {font-size:0.875em; color:#888; padding:0.25em;}
 .prd_price {padding:0.25em;}
-.prd_price > :first-child{ text-decoration: line-through; color:#aaa; font-size: 1em; }
-.prd_price > :last-child{ color:#84b736; font-size: 1.25em; padding:0.25em; font-weight: bold;}
-.prd_hover {position: absolute; width:110%; padding:5%;left:-5%; top:-5%;  border:1px solid #f1f1f1; display:none; box-shadow: 0 0 5px rgba(0,0,0,0.2); } 
-.prd_hover > li:not(:first-child) {background-color: #fff; }
+.prd_price > :first-child {text-decoration:line-through; color:#aaa; font-size:1em;}
+.prd_price > :last-child {color:#84b736; font-size:1.25em; font-weight:bold;}
+
+.prd_hover {position:absolute; width:110%; padding:5% 5% 0 5%; left:-5%; top:-5%; border:1px solid #f1f1f1; box-shadow:0 0 5px rgba(0,0,0,0.2); display:none; z-index: 3; }
+.prd_hover > ul {background-color:#fff; padding-bottom:5%;}
 .prd_hover > .prd_img {overflow: hidden;}
-.prd_hover > .prd_img > img {animation-duration: 3s;  animation-fill-mode: forwards; animation-timing-function: ease-in; }
+.prd_hover > .prd_img > img {animation-duration:3s; animation-fill-mode: forwards; animation-timing-function: ease-in; opacity:0;}
 @keyframes prdImg {
 	0% {transform: scale(1);}
 	100% {transform: scale(1.2);}
@@ -196,10 +199,17 @@ position: absolute; top:0; right:-0.5em;}
 	0% {transform: scale(1.2);}
 	100% {transform: scale(1);}
 }
-.prd_hover > .prd_compare {position: relative;; line-height:1.5em; padding:0.75em 0; border-top:1px solid #eee; border-bottom:1px solid #eee;
-color:#999; text-align: right;}
-.prd_hover > .prd_tit {position: relative;}
-.prd_hover > .prd_cate {position: relative;}
-.prd_hover > .prd_price {position: relative;}
-.prd_pop {width:60px; height:60px; line-height:60px; color:#fff; font-weight: bold; font-size: 1.125em;background-color: #84b736; border-radius: 30px; position: absolute;
-top:10px; left:10px;}
+.prd_hover .prd_compare {position:relative; width:100%;}
+.prd_hover .prd_compare > div {position:absolute; line-height:24px; padding:8px 0; 
+		border-top:1px solid #eee; border-bottom:1px solid #eee; text-align:right; width:100%; background-color:#fff;}	
+.prd_hover .prd_tit {position:relative;}
+.prd_hover .prd_cate {position:relative;}
+.prd_hover .prd_price {position:relative;}
+.prd_hover .prd_cont {position:relative; font-size:1.25em; height:6em; line-height:1.5em; overflow:hidden;}
+.prd_hover .prd_cont  > div {width:100%; position: absolute; bottom:-20px; height:20px; background-color: #fff; cursor: pointer;}
+.prd_hover .prd_detail {position:relative; color:#fff; height:40px; cursor: pointer; margin-top:10px; }
+.prd_hover .prd_detail > :nth-child(1) {float:left; width:25%; padding:8px 0;}
+.prd_hover .prd_detail > :nth-child(2) {float:left; width:50%; height:40px; background-color: #84b736; border-bottom:2px solid #405e14; overflow-y: hidden;}
+.prd_hover .prd_detail > :nth-child(2) > li {height:38px; line-height:40px; font-size: 1.25em;}
+.prd_hover .prd_detail > :nth-child(3) {float:left; width:25%; padding:8px 0;}
+.prd_pop {width:60px; height:60px; line-height:60px; color:#fff; font-weight:bold; font-size:1.125em; background-color: #84b736; border-radius:30px; position: absolute; top:10px; left:10px;}

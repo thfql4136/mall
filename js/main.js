@@ -661,79 +661,8 @@ $(".featured_item").hover(function(){
 
 /********** Featured Products ***********/
 var prdNum = 0;
-$(".prd_nav > li").click(function(){ //이벤트 선언
- prdNum = $(this).index(); //클릭 된 애 값을 받아올꺼야, index는 값을 가져올때 사용
- $(".prd_nav > li").css({"color":"#666"});
-$(".prd_nav div").css({"width":0});
-$(this).css({"color":"#222"});
-$(this).children("div").css({"width":"100%"});
-});
 
-$(".prd_nav > li").hover(function(){//이벤트 선언
-	if($(this).index() !=prdNum){ //현재 선택된 애는 제외 시킨다
-		$(this).css({"color":"#222"});
-		$(this).children("div").stop().animate({"width":"100%"}, 100);
-	}
-},function(){
-    if($(this).index() !=prdNum){
-		$(this).css({"color":"#666"});
-		$(this).children("div").stop().animate({"width":"0%"}, 100);
-	}
-});
-$(".prd_nav > li").eq(0).trigger("click");//이벤트 실행, eq는 나의 순서를 달라고 할때 사용
-/********** 내가 짠것 ***********/
-/* $(".prd_nav").find("li:nth-child(1)").css({"color":"#222"});
-$(".prd_nav").find(".one").css({"width":"100%"});
-
-$(".prd_nav > li:nth-child(1)").click(function(){
-	$(this).css({"color":"#222"});
-$(".one").css({"width":"100%"});
-	$(".prd_nav").find("li:nth-child(2)").css({"color":"#666"});
-	$(".prd_nav").find(".two").css({"width":"0%"});	
-	$(".prd_nav > li:nth-child(3)").css({"color":"#666"});
-$(".three").css({"width":"0%"});
-});
-
-$(".prd_nav > li:nth-child(1)").hover(function(){
-	$(".one").css({"width":"100%"});
-}, function(){
-	$(".one").css({"width":"100%"});
-});
-
-$(".prd_nav > li:nth-child(2)").click(function(){
-	$(".prd_nav").find("li:nth-child(1)").css({"color":"#666"});
-	$(".prd_nav").find(".one").css({"width":"0%"});	
-$(this).css({"color":"#222"});
-$(".two").css({"width":"100%"});
-$(".prd_nav > li:nth-child(3)").css({"color":"#666"});
-$(".three").css({"width":"0%"});
-});
-$(".prd_nav > li:nth-child(2)").hover(function(){
-	$(".two").css({"width":"100%"});
 	
-}, function(){
-	$(".two").css({"width":"100%"});
-});
-
-
-$(".prd_nav > li:nth-child(3)").click(function(){
-	$(".prd_nav").find("li:nth-child(2)").css({"color":"#666"});
-	$(".prd_nav").find(".two").css({"width":"0%"});	
-$(this).css({"color":"#222"});
-$(".three").css({"width":"100%"});
-});
-
-$(".prd_nav > li:nth-child(3)").hover(function(){
-	$(".three").css({"width":"100%"});
-}, function(){
-	$(".three").css({"width":"0%"});
-}); */
-
-
-$(".prd").hover(function(){
-	$(this).children(".prd_hover").stop().fadeIn(300);
-	},function(){
-		$(this).children(".prd_hover").stop().fadeOut(300)});
 
 /* $(".prd").hover(function(){
 $(this).children(".prd_hover").stop().fadeIn(300, function(){ //콜백기능
@@ -747,8 +676,165 @@ $(this).children(".prd_img").children("img").css({"animation-name":"prdImg"})
 
 }, function(){
 	$(this).children(".prd_hover").stop().fadeOut(300)}); */
-$(".prd_hover_img").hover(function(){
-	$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
-}, function(){
-	$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+
+
+$.ajax({
+	url:"../json/prds.json",
+	datatype:"json",
+	type:"post",
+	data:{id:0},
+	success: function(data){
+		console.log()
+	},
+	error: function(xhr, status, error){// 통신 상태, 지금 상태, 에러
+		alert("통신이 원할하지않습니다. \n 잠시후 다시 시도해주세요.");
+		console.log(xhr, status, error);
+	}
 });
+
+//위에꺼랑 똑같은 구문(아래는 객체화 시킨것)
+/* var prds = new Ajax("../json/prds.json");
+prds.addData({id:0});
+prds.send(function(data){
+	console.log(data)
+}); */
+
+//위에꺼랑 똑같은 구문(아래는 객체화시키고 function을 밖으로 빼고 변수 이름을 줘서 send에 넣어준것)
+/* var prds = new Ajax("../json/prds.json");
+prds.addData({id:0});
+prds.send(resultFn);
+function resultFn(data){
+	console.log(data)} */
+
+	//{"result":[{"title":"best","data":[{},{}]},{...},{...}]} -->json에 data 구조 입니다.
+	var prds = new Ajax("../json/prds.json");
+	prds.send(resultFn);
+	function resultFn(data){
+		var html = '';
+		var li;
+		for(var i = 0; i<data.result.length; i++){
+			html = '<ul class="prd_wrap clear">';
+			for(var j=0; j<data.result[i].data.length; j++){
+				li = data.result[i].data[j];
+				html += '<li class="prd">';
+				html += '<div class="prd_img">';
+				html += '<img src="'+li.img[0]+'" class="img">';
+				html += '</div>';
+				html += '<div class="prd_tit">'+li.title+'</div>';
+				html += '<div class="prd_cate">'+li.cate+'</div>';
+				html += '<div class="prd_price">';
+				html += '<span>'+li.price[0]+'</span>';
+				html += '<span>'+li.price[1]+'</span>';
+				html += '</div>';
+				html += '<div class="prd_hover">';
+				html += '<div class="prd_img">';
+				html += '<img src="'+li.img[1]+'" class="img prd_hover_img">';
+				html += '</div>';
+				html += '<ul>';
+				html += '<li class="prd_compare">';
+				html += '<div>';
+				html += '<img src="../img/main/baseline-compare_arrows-24px.svg">';
+				html += '</div>';
+				html += '</li>';
+				html += '<li class="prd_tit">'+li.title+'</li>';
+				html += '<li class="prd_cate">'+li.cate+'</li>';
+				html += '<li class="prd_price">';
+				html += '<span>'+li.price[0]+'</span>';
+				html += '<span>'+li.price[1]+'</span>';
+				html += '</li>';
+				html += '<li class="prd_cont">';
+				html += li.cont;
+				html += '<div><i class="fa fa-ellipsis-h"></i></div>';
+				html += '</li>';
+				html += '<li class="prd_detail clear">';
+				html += '<div>';
+				html += '<a href="#" data-toggle="tooltip" data-placement="top" title="Add to Wishlist">';
+				html += '<img src="../img/main/baseline-favorite_border-24px.svg">';
+				html += '</a>';
+				html += '</div>';
+				html += '<ul>';
+				html += '<li>VIEW PRODUCTS</li>';
+				html += '<li><i class="fa fa-shopping-cart"></i></li>';
+				html += '</ul>';
+				html += '<div>';
+				html += '<a href="#" data-toggle="tooltip" data-placement="top" title="Search">';
+				html += '<img src="../img/main/baseline-search-24px.svg">';
+				html += '</a>';
+				html += '</div>';
+				html += '</li>';
+				html += '</ul>';
+				html += '</div>';
+				if(li.pct > 0) html += '<div class="prd_pop">-'+li.pct+'%</div>';
+				html += '</li>';
+		}
+			html += '</ul>';
+			$(".prd_out_wrap").append(html);
+		}
+		$(".prd_nav > li").click(function(){ //이벤트 선언
+			$(".prd_wrap").eq(prdNum).stop().animate({"top":"5rem", "opacity":0}, 500 , function(){
+				$(this).css({"display":"none"});
+			});
+		 prdNum = $(this).index(); //클릭 된 애 값을 받아올꺼야, index는 값을 가져올때 사용
+		 $(".prd_wrap").eq(prdNum).css({"display":"block"}).stop().animate({"top":0, "opacity":1}, 500 );
+		 $(".prd_nav > li").css({"color":"#666"});
+		$(".prd_nav div").css({"width":0});
+		$(this).css({"color":"#222"});
+		$(this).children("div").css({"width":"100%"});
+		});
+		
+		$(".prd_nav > li").hover(function(){//이벤트 선언
+			if($(this).index() !=prdNum){ //현재 선택된 애는 제외 시킨다
+				$(this).css({"color":"#222"});
+				$(this).children("div").stop().animate({"width":"100%"}, 100);
+			}
+		},function(){
+			if($(this).index() !=prdNum){
+				$(this).css({"color":"#666"});
+				$(this).children("div").stop().animate({"width":"0%"}, 100);
+			}
+		});
+		$(".prd_nav > li").eq(0).trigger("click");//이벤트 실행, eq는 나의 순서를 달라고 할때 사용
+		
+		//그냥 가져다가 붙인거야
+		// for(var i = 0; i<7; i++){
+		// 	$(".prd_wrap").append($(".prd").eq(0).clone());
+		// }
+		
+		
+		
+		$(".prd").hover(function(){
+			$(this).children(".prd_hover").stop().fadeIn(300);
+			$(this).find(".prd_compare").find("div").stop().animate({"top":"-43px"},300);
+			if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight){ //실제 높이 = scrollHeight, 주어진 높이 =offsetHeight
+				//$(".prd_cont")[0] >이부분은 html을 의미한다
+				 //overflow가 발생한 상태
+				 console.log("overflow");
+				 $(this).find(".prd_cont").children("div").stop().animate({"bottom":0}, 200);
+				 $(this).find(".prd_cont").children("div").click(function(){
+					 $(this).parent().css({"height":"auto"});
+					 $(this).hide(0);
+				 });
+			}
+			$(this).find(".prd_detail").children("ul").hover(function(){
+				$(this).children(":first-child").stop().animate({"margin-top":"-38px"}, 200);
+			}, function(){
+				$(this).children(":first-child").stop().animate({"margin-top":0}, 200);
+			});
+		
+			},function(){
+				$(this).children(".prd_hover").stop().fadeOut(300);
+				$(this).find(".prd_compare").find("div").stop().animate({"top":0},300);
+				if($(this).find(".prd_cont")[0].offsetHeight < $(this).find(".prd_cont")[0].scrollHeight){ //실제 높이 = scrollHeight, 주어진 높이 =offsetHeight
+					//$(".prd_cont")[0] >이부분은 html을 의미한다
+					 //overflow가 발생한 상태
+					 console.log("overflow");
+					 $(this).find(".prd_cont").children("div").stop().animate({"bottom":"-20px"}, 200);
+				}
+			});
+			$(".prd_hover_img").hover(function(){
+				$(this).stop().animate({"opacity":1}, 200).css({"animation-name":"prdImg"});
+			}, function(){
+				$(this).stop().animate({"opacity":0}, 200).css({"animation-name":"prdImgBack"});
+			});
+			$('[data-toggle="tooltip"]').tooltip(); 
+	}

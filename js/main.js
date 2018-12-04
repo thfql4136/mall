@@ -1,7 +1,20 @@
+//자동 높이 계산 함수
+function autoHeight(){
+    $(".hei-wrap").imagesLoaded().done(heiCalc);
+    $(window).resize(heiCalc);
+    function heiCalc(){
+        $(".hei-wrap").each(function(){
+            $(this).height($(this).find(".hei-elem").height());
+        });
+    }
+}
+autoHeight();
+
 /*********** 미이지 로더 ***************/
 $('body').imagesLoaded()
 .done( function( instance ) {
 	$(".loader").hide(0);
+
   console.log('all images successfully loaded');
 })
 .progress( function( instance, image ) {
@@ -713,7 +726,7 @@ function resultFn(data){
 		var html = '';
 		var li;
 		for(var i = 0; i<data.result.length; i++){
-			html = '<ul class="prd_wrap clear">';
+			html = '<ul class="prd_wrap clear hei-elem">';
 			for(var j=0; j<data.result[i].data.length; j++){
 				li = data.result[i].data[j];
 				html += '<li class="prd">';
@@ -769,10 +782,13 @@ function resultFn(data){
 		}
 			html += '</ul>';
 			$(".prd_out_wrap").append(html);
+			autoHeight();
 		}
+		//생성완료된 후 이벤트 처리
 		$(".prd_nav > li").click(function(){ //이벤트 선언
 			$(".prd_wrap").eq(prdNum).stop().animate({"top":"5rem", "opacity":0}, 500 , function(){
 				$(this).css({"display":"none"});
+				
 			});
 		 prdNum = $(this).index(); //클릭 된 애 값을 받아올꺼야, index는 값을 가져올때 사용
 		 $(".prd_wrap").eq(prdNum).css({"display":"block"}).stop().animate({"top":0, "opacity":1}, 500 );
@@ -838,3 +854,125 @@ function resultFn(data){
 			});
 			$('[data-toggle="tooltip"]').tooltip(); 
 	}
+
+	/*****하단 배너***** */
+
+	var fNum = 0;	//현재의 index
+	var fLen = $(".fban > li").length - 1;	//마지막 index (예:5개라면 0,1,2,3,4 -> 4)
+	var duration = 500;	//animate 속도
+	//최초 한번 실행
+	$(window).resize(function(){
+		//본 작업을 진행하는 이유는 absolute 되어 있는 객체의 높이를 계산하기 위해서..
+		$(".fban").height($(".fban > li").eq(fNum).height()+30);
+	}).trigger("resize");
+	$(".fban > li").each(function(i){
+		$('<i class="fa-circle"></i>').appendTo("#fban_pager").click(function(){
+			var iNum = $(this).index();
+			if(fNum < iNum) {
+				$(".fban > li").eq(fNum + 1).hide();
+				$(".fban > li").eq(iNum).show().css({"left":"100%"});
+				fNum = iNum;
+				fbanAni("-100%");
+			}
+			else if(fNum > iNum) {
+				$(".fban > li").eq(fNum - 1).hide();
+				$(".fban > li").eq(iNum).show().css({"left":"-100%"});
+				fNum = iNum;
+				fbanAni("100%");
+			}
+		});
+	});
+	fbanPos();
+	function fbanAni(val) {
+		$(".fban").height($(".fban > li").eq(fNum).height() +30);
+		$(".fban > li").eq(fNum).css({"animation-name":"fbanAni", "animation-duration":duration*0.001+"s"});
+		$(".fban").stop().animate({"left":val}, duration, fbanPos);
+	}
+	function fbanPos() {
+		$("#fban_pager > i").removeClass("fas").addClass("far");
+		$("#fban_pager > i").eq(fNum).removeClass("far").addClass("fas");
+		$(".fban > li").hide().css({"animation-name":""});
+		$(".fban").css({"left":0});
+		$(".fban > li").eq(fNum).show().css({"left":0});
+		if(fNum == 0) {
+			$(".fban > li").eq(fLen).show().css({"left":"-100%"});
+			$(".fban > li").eq(1).show().css({"left":"100%"});
+		}
+		else if(fNum == fLen) {
+			$(".fban > li").eq(fNum - 1).show().css({"left":"-100%"});
+			$(".fban > li").eq(0).show().css({"left":"100%"});
+		}
+		else {
+			$(".fban > li").eq(fNum - 1).show().css({"left":"-100%"});
+			$(".fban > li").eq(fNum + 1).show().css({"left":"100%"});
+		}
+	}
+	$("#fban_lt").click(function(){
+		if(fNum == fLen) fNum = 0;
+		else fNum++;
+		fbanAni("-100%");
+	});
+	$("#fban_rt").click(function(){
+		if(fNum == 0) fNum = fLen;
+		else fNum--;
+		fbanAni("100%");
+	});
+	
+
+/* $(".fban > li").each(function(i){
+		$("#fban_pager").append('<i class="fa-circle"></i>')
+	});
+
+	$("#fban_pager > i").click(function(){
+		var iNum = $(this).index()
+		if(fNum < iNum){
+			$(".fban > li").eq(fNum + 1).hide();
+			$(".fban > li").eq(iNum).show().css({"left":"100%"});
+			fNum = iNum;
+			$(".fban > li").eq(fNum).css({"animation-name":"fbanAni", "animation-duration":duration*0.001+"s"});
+			$(".fban").stop().animate({"left":"-100%"}, duration, fbanPos);
+		}
+		else if(fNum > iNum){
+			$(".fban > li").eq(fNum + 1).hide();
+			$(".fban > li").eq(iNum).show().css({"left":"-100%"});
+			fNum = iNum;
+			$(".fban > li").eq(fNum).css({"animation-name":"fbanAni", "animation-duration":duration*0.001+"s"});
+			$(".fban").stop().animate({"left":"100%"}, duration, fbanPos);
+		}
+		var gap =  fNum - $(this).index();
+		fNum = $(this).index();
+		$(".fban").stop().animate({"left":(100*gap)+"%"}, duration, fbanPos);
+	});
+	fbanPos();
+	function fbanPos() {
+	$("#fban_pager > i").removeClass("fas").addClass("far");
+	$("#fban_pager > i").eq(fNum).removeClass("far").addClass("fas");
+	$(".fban > li").hide().css({"animation-name":""});
+	$(".fban").css({"left":0});
+	$(".fban > li").eq(fNum).show().css({"left":0});
+	if(fNum == 0) {
+		$(".fban > li").eq(fLen).show().css({"left":"-100%"});
+		$(".fban > li").eq(1).show().css({"left":"100%"});
+	}
+	else if(fNum == fLen) {
+		$(".fban > li").eq(fNum - 1).show().css({"left":"-100%"});
+		$(".fban > li").eq(0).show().css({"left":"100%"});
+	}
+	else {
+		$(".fban > li").eq(fNum - 1).show().css({"left":"-100%"});
+		$(".fban > li").eq(fNum + 1).show().css({"left":"100%"});
+	}
+}
+$("#fban_lt").click(function(){
+	if(fNum == fLen) fNum = 0;
+	else fNum++;
+	$(".fban > li").eq(fNum).css({"animation-name":"fbanAni", "animation-duration":duration*0.001+"s"});
+	$(".fban").stop().animate({"left":"-100%"}, duration, fbanPos);
+});
+$("#fban_rt").click(function(){
+	if(fNum == 0) fNum = fLen;
+	else fNum--;
+	$(".fban > li").eq(fNum).css({"animation-name":"fbanAni", "animation-duration":duration*0.001+"s"});
+	$(".fban").stop().animate({"left":"100%"}, duration, fbanPos);
+});
+fbanInit(); */
